@@ -290,7 +290,7 @@ Proyek ini bertujuan untuk:
 
 ## 👨‍💻 Author
 
-**Nama:** Your Name  
+**Nama:** Haikal Fairuzi Maulana 
 **Kursus:** Belajar Machine Learning Pemula (BMLP)  
 **Submission:** Akhir BMLP
 
