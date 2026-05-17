@@ -1,141 +1,145 @@
-# Machine Learning Pemula - Clustering & Classification
+# Beginner Machine Learning - Clustering & Classification
 
-Proyek ini merupakan submission akhir untuk kursus **Belajar Machine Learning Pemula (BMLP)** yang fokus pada analisis data transaksi bank menggunakan teknik **Clustering** dan **Classification** untuk deteksi penipuan (fraud detection) dan identifikasi anomali.
+This project is the final submission for the course **Belajar Machine Learning Pemula (BMLP)**, focusing on bank transaction data analysis using **Clustering** and **Classification** techniques for fraud detection and anomaly identification.
 
 ---
 
-## 📋 Daftar Isi
+## 📋 Table of Contents
 
-- [Deskripsi Proyek](#deskripsi-proyek)
-- [Struktur File](#struktur-file)
+- [Project Description](#project-description)
+- [File Structure](#file-structure)
 - [Dataset](#dataset)
-- [Notebook](#notebook)
-- [Model yang Dihasilkan](#model-yang-dihasilkan)
-- [Library yang Digunakan](#library-yang-digunakan)
-- [Cara Penggunaan](#cara-penggunaan)
-- [Fitur Utama](#fitur-utama)
-- [Hasil Analisis](#hasil-analisis)
+- [Notebooks](#notebooks)
+- [Generated Models](#generated-models)
+- [Libraries Used](#libraries-used)
+- [How to Use](#how-to-use)
+- [Key Features](#key-features)
+- [Analysis Results](#analysis-results)
+- [Project Goals](#project-goals)
+- [Important Notes](#important-notes)
+- [Author](#author)
+- [License](#license)
 
 ---
 
-## 📝 Deskripsi Proyek
+## 📝 Project Description
 
-Proyek ini menganalisis perilaku transaksi dan pola aktivitas keuangan dari **2.512+ sampel data transaksi bank**. Dataset mencakup berbagai atribut transaksi, demografi nasabah, dan pola penggunaan yang sangat ideal untuk:
+This project analyzes transaction behavior and financial activity patterns from over **2,512** bank transaction samples. The dataset includes various transaction attributes, customer demographics, and usage patterns, which make it suitable for:
 
-- **Deteksi Penipuan (Fraud Detection)**
-- **Identifikasi Anomali (Anomaly Detection)**
-- **Segmentasi Nasabah (Customer Segmentation)**
+- **Fraud Detection**
+- **Anomaly Detection**
+- **Customer Segmentation**
 
-Proyek ini terdiri dari dua bagian utama:
-1. **Clustering** - Mengelompokkan transaksi berdasarkan pola serupa
-2. **Classification** - Memprediksi kelas/target berdasarkan fitur yang ada
+The project is divided into two main parts:
+1. **Clustering** - Grouping transactions by similar patterns
+2. **Classification** - Predicting classes/targets based on available features
 
 ---
 
-## 📁 Struktur File
+## 📁 File Structure
 
 ```
 Machine Learning Pemula/
 │
-├── [Clustering]_Submission_Akhir_BMLP_Your_Name.ipynb    # Notebook untuk analisis clustering
-├── [Klasifikasi]_Submission_Akhir_BMLP_Your_Name.ipynb # Notebook untuk klasifikasi
+├── [Clustering]_Submission_Akhir_BMLP_Your_Name.ipynb    # Notebook for clustering analysis
+├── [Klasifikasi]_Submission_Akhir_BMLP_Your_Name.ipynb  # Notebook for classification
 │
-├── bank_transactions_data_edited.csv                     # Dataset transaksi bank (raw)
-├── bank_transactions_data_edited.xlsx                  # Dataset dalam format Excel
-├── bank_transactions_data_edited - new data.csv          # Dataset dengan data baru
-├── data_clustering.csv                                 # Dataset hasil clustering (normalized)
-├── data_clustering_inverse.csv                         # Dataset hasil clustering (original values)
+├── bank_transactions_data_edited.csv                    # Bank transactions dataset (raw)
+├── bank_transactions_data_edited.xlsx                   # Dataset in Excel format
+├── bank_transactions_data_edited - new data.csv         # Dataset with new data
+├── data_clustering.csv                                  # Preprocessed clustering dataset (normalized)
+├── data_clustering_inverse.csv                          # Clustering dataset (original values)
 │
-├── model_clustering.h5                                 # Model KMeans clustering
-├── PCA_model_clustering.h5                             # Model PCA + Clustering
-├── decision_tree_model.h5                              # Model Decision Tree classifier
-├── explore_RandomForest_classification.h5              # Model Random Forest classifier
-└── tuning_classification.h5                            # Model Random Forest dengan tuning
+├── model_clustering.h5                                  # KMeans clustering model
+├── PCA_model_clustering.h5                              # PCA + clustering model
+├── decision_tree_model.h5                               # Decision Tree classifier model
+├── explore_RandomForest_classification.h5               # Random Forest classifier model
+└── tuning_classification.h5                             # Tuned Random Forest model
 ```
 
 ---
 
 ## 📊 Dataset
 
-### Dataset Utama: Bank Transactions Data
+### Main Dataset: Bank Transactions Data
 
-Dataset ini menyajikan gambaran mendalam mengenai perilaku transaksi dengan **16 fitur utama**:
+The dataset provides an in-depth view of transaction behavior with **16 main features**:
 
-| Fitur | Deskripsi |
-|-------|-----------|
-| `TransactionID` | Pengidentifikasi unik alfanumerik untuk setiap transaksi |
-| `AccountID` | ID unik untuk setiap akun |
-| `TransactionAmount` | Nilai transaksi dalam mata uang |
-| `TransactionDate` | Tanggal dan waktu transaksi |
-| `TransactionType` | Tipe transaksi: `Credit` atau `Debit` |
-| `Location` | Lokasi geografis transaksi (kota di Amerika Serikat) |
-| `DeviceID` | ID perangkat yang digunakan |
-| `IP Address` | Alamat IPv4 yang digunakan |
-| `MerchantID` | ID unik merchant |
-| `AccountBalance` | Saldo akun setelah transaksi |
-| `PreviousTransactionDate` | Tanggal transaksi terakhir |
-| `Channel` | Kanal transaksi: `Online`, `ATM`, atau `Branch` |
-| `CustomerAge` | Usia pemilik akun |
-| `CustomerOccupation` | Profesi: `Doctor`, `Engineer`, `Student`, `Retired` |
-| `TransactionDuration` | Lama waktu transaksi (dalam detik) |
-| `LoginAttempts` | Jumlah upaya login sebelum transaksi |
+| Feature | Description |
+|---------|-------------|
+| `TransactionID` | Unique alphanumeric identifier for each transaction |
+| `AccountID` | Unique identifier for each account |
+| `TransactionAmount` | Transaction amount in currency |
+| `TransactionDate` | Date and time of the transaction |
+| `TransactionType` | Transaction type: `Credit` or `Debit` |
+| `Location` | Geographical location of the transaction (US city) |
+| `DeviceID` | ID of the device used |
+| `IP Address` | IPv4 address used |
+| `MerchantID` | Unique merchant identifier |
+| `AccountBalance` | Account balance after the transaction |
+| `PreviousTransactionDate` | Date of the previous transaction |
+| `Channel` | Transaction channel: `Online`, `ATM`, or `Branch` |
+| `CustomerAge` | Age of the account holder |
+| `CustomerOccupation` | Occupation: `Doctor`, `Engineer`, `Student`, `Retired` |
+| `TransactionDuration` | Transaction duration (in seconds) |
+| `LoginAttempts` | Number of login attempts before the transaction |
 
-### Dataset Hasil Clustering
+### Clustering Output Dataset
 
-Dataset hasil preprocessing dengan fitur tambahan:
-- `AgeGroup` - Kelompok usia (Muda/Tua)
-- `Target` - Label target untuk klasifikasi
+Preprocessed dataset with additional fields:
+- `AgeGroup` - Age group (Young/Old)
+- `Target` - Target label for classification
 
 ---
 
-## 📓 Notebook
+## 📓 Notebooks
 
 ### 1. [Clustering]_Submission_Akhir_BMLP_Your_Name.ipynb
 
-Notebook untuk analisis clustering dengan tahapan:
+Notebook for clustering analysis with the following steps:
 
-**A. Import Library**
+**A. Import Libraries**
 - pandas, numpy, matplotlib, seaborn
 - sklearn: LabelEncoder, StandardScaler, KMeans, PCA
 - yellowbrick: KElbowVisualizer
 
 **B. Data Loading & Exploration**
-- Load dataset dari Google Sheets
-- Eksplorasi struktur data (head, info, describe)
+- Load dataset from Google Sheets
+- Explore data structure (`head`, `info`, `describe`)
 
 **C. Data Preprocessing**
-- Handling missing values
-- Removing duplicates
-- Feature encoding dengan LabelEncoder
-- Handling outliers menggunakan IQR method
-- Standardization dengan StandardScaler
+- Handle missing values
+- Remove duplicates
+- Feature encoding using `LabelEncoder`
+- Handle outliers using the IQR method
+- Standardize features with `StandardScaler`
 
 **D. Clustering Analysis**
-- Elbow method untuk menentukan jumlah cluster optimal
+- Elbow method to determine the optimal number of clusters
 - KMeans clustering
-- PCA untuk dimensionality reduction
-- Evaluasi dengan Silhouette Score
+- PCA for dimensionality reduction
+- Evaluate with Silhouette Score
 
-**E. Interpretasi Hasil**
-- Inverse transform untuk mendapatkan nilai asli
-- Analisis karakteristik setiap cluster
+**E. Results Interpretation**
+- Inverse transform to obtain original values
+- Analyze characteristics of each cluster
 
 ### 2. [Klasifikasi]_Submission_Akhir_BMLP_Your_Name.ipynb
 
-Notebook untuk klasifikasi dengan tahapan:
+Notebook for classification with the following steps:
 
-**A. Import Library**
-- sklearn: train_test_split, DecisionTree, RandomForest
-- sklearn metrics: accuracy_score, precision_score, recall_score, f1_score
-- GridSearchCV, RandomizedSearchCV untuk hyperparameter tuning
+**A. Import Libraries**
+- sklearn: `train_test_split`, `DecisionTreeClassifier`, `RandomForestClassifier`
+- sklearn metrics: `accuracy_score`, `precision_score`, `recall_score`, `f1_score`
+- `GridSearchCV`, `RandomizedSearchCV` for hyperparameter tuning
 
 **B. Data Loading**
-- Menggunakan `data_clustering_inverse.csv`
-- One Hot Encoding untuk fitur kategorikal
+- Uses `data_clustering_inverse.csv`
+- One-Hot Encoding for categorical features
 
 **C. Data Splitting**
-- Train-test split dengan proporsi 80:20
-- Stratified split untuk menjaga proporsi kelas
+- Train-test split with 80:20 ratio
+- Stratified split to preserve class proportions
 
 **D. Model Building**
 - Decision Tree Classifier
@@ -143,29 +147,29 @@ Notebook untuk klasifikasi dengan tahapan:
 
 **E. Model Evaluation**
 - Classification report (precision, recall, f1-score)
-- Perbandingan performa antar model
+- Compare performance between models
 
 **F. Hyperparameter Tuning**
-- GridSearchCV untuk Random Forest
-- Parameter: `n_estimators`, `max_depth`, `min_samples_split`
+- `GridSearchCV` for Random Forest
+- Parameters: `n_estimators`, `max_depth`, `min_samples_split`
 
 ---
 
-## 🤖 Model yang Dihasilkan
+## 🤖 Generated Models
 
-| Model File | Algoritma | Deskripsi |
-|------------|-----------|-----------|
-| `model_clustering.h5` | KMeans | Model clustering dasar |
-| `PCA_model_clustering.h5` | PCA + KMeans | Model dengan reduksi dimensi PCA |
-| `decision_tree_model.h5` | Decision Tree | Model klasifikasi baseline |
-| `explore_RandomForest_classification.h5` | Random Forest | Model klasifikasi Random Forest |
-| `tuning_classification.h5` | Random Forest (Tuned) | Model dengan hyperparameter optimal |
+| Model File | Algorithm | Description |
+|------------|-----------|-------------|
+| `model_clustering.h5` | KMeans | Base clustering model |
+| `PCA_model_clustering.h5` | PCA + KMeans | Model with PCA dimensionality reduction |
+| `decision_tree_model.h5` | Decision Tree | Baseline classification model |
+| `explore_RandomForest_classification.h5` | Random Forest | Random Forest classifier |
+| `tuning_classification.h5` | Random Forest (Tuned) | Model with optimized hyperparameters |
 
 ---
 
-## 📚 Library yang Digunakan
+## 📚 Libraries Used
 
-### Untuk Clustering:
+### For Clustering:
 ```python
 import pandas as pd
 import numpy as np
@@ -179,7 +183,7 @@ from yellowbrick.cluster import KElbowVisualizer
 import joblib
 ```
 
-### Untuk Klasifikasi:
+### For Classification:
 ```python
 import pandas as pd
 from sklearn.model_selection import train_test_split, GridSearchCV
@@ -191,70 +195,70 @@ import joblib
 
 ---
 
-## 🚀 Cara Penggunaan
+## 🚀 How to Use
 
 ### 1. Setup Environment
 ```bash
-# Install library yang diperlukan
+# Install required libraries
 pip install pandas numpy matplotlib seaborn scikit-learn yellowbrick joblib
 ```
 
-### 2. Menjalankan Notebook Clustering
+### 2. Run the Clustering Notebook
 ```python
-# Buka notebook clustering
+# Open the clustering notebook
 jupyter notebook "[Clustering]_Submission_Akhir_BMLP_Your_Name.ipynb"
 
-# Jalankan seluruh cell (Run All)
+# Run all cells (Run All)
 ```
 
-### 3. Menjalankan Notebook Klasifikasi
+### 3. Run the Classification Notebook
 ```python
-# Buka notebook klasifikasi
+# Open the classification notebook
 jupyter notebook "[Klasifikasi]_Submission_Akhir_BMLP_Your_Name.ipynb"
 
-# Jalankan seluruh cell (Run All)
+# Run all cells (Run All)
 ```
 
-### 4. Menggunakan Model yang Sudah Dilatih
+### 4. Use the Trained Models
 ```python
 import joblib
 
-# Load model clustering
+# Load clustering model
 clustering_model = joblib.load('model_clustering.h5')
 
-# Load model klasifikasi
+# Load classification model
 classifier_model = joblib.load('tuning_classification.h5')
 
-# Prediksi
+# Predict
 predictions = classifier_model.predict(X_new)
 ```
 
 ---
 
-## ⭐ Fitur Utama
+## ⭐ Key Features
 
 ### A. Clustering Features:
-- ✅ **Elbow Method** - Menentukan jumlah cluster optimal
-- ✅ **KMeans Clustering** - Algoritma clustering populer
-- ✅ **PCA** - Reduksi dimensi untuk visualisasi
-- ✅ **Silhouette Score** - Evaluasi kualitas cluster
-- ✅ **Outlier Handling** - Menggunakan metode IQR
+- ✅ **Elbow Method** - Determine the optimal number of clusters
+- ✅ **KMeans Clustering** - Popular clustering algorithm
+- ✅ **PCA** - Dimensionality reduction for visualization
+- ✅ **Silhouette Score** - Cluster quality evaluation
+- ✅ **Outlier Handling** - Using the IQR method
 
 ### B. Classification Features:
-- ✅ **Decision Tree** - Model interpretable baseline
-- ✅ **Random Forest** - Ensemble method untuk akurasi tinggi
-- ✅ **Hyperparameter Tuning** - GridSearchCV untuk optimasi
-- ✅ **Cross-validation** - Validasi model yang robust
+- ✅ **Decision Tree** - Interpretable baseline model
+- ✅ **Random Forest** - Ensemble method for higher accuracy
+- ✅ **Hyperparameter Tuning** - `GridSearchCV` for optimization
+- ✅ **Cross-validation** - Robust model validation
 - ✅ **Comprehensive Metrics** - Accuracy, Precision, Recall, F1-Score
 
 ---
 
-## 📈 Hasil Analisis
+## 📈 Analysis Results
 
 ### Clustering Results:
-- Dataset dengan **16 fitur** berhasil diklusterkan
-- Outlier berhasil ditangani menggunakan metode IQR
-- Visualisasi cluster menggunakan PCA
+- The dataset with **16 features** was successfully clustered
+- Outliers were handled using the IQR method
+- Cluster visualizations were produced using PCA
 
 ### Classification Results:
 | Model | Accuracy | Precision | Recall | F1-Score |
@@ -263,43 +267,43 @@ predictions = classifier_model.predict(X_new)
 | Random Forest | 100% | 100% | 100% | 100% |
 | Random Forest (Tuned) | 100% | 100% | 100% | 100% |
 
-*Note: Hasil 100% mengindikasikan dataset yang relatif bersih dan fitur yang sangat prediktif untuk target.*
+*Note: 100% results may indicate a relatively clean dataset and highly predictive features for the target.*
 
 ---
 
-## 🎯 Tujuan Proyek
+## 🎯 Project Goals
 
-Proyek ini bertujuan untuk:
-1. **Mempelajari teknik clustering** untuk segmentasi data transaksi
-2. **Mengimplementasikan klasifikasi** untuk prediksi target
-3. **Menerapkan best practices** dalam preprocessing data
-4. **Mengeksplorasi hyperparameter tuning** untuk optimasi model
-5. **Memahami end-to-end workflow** machine learning
+This project aims to:
+1. **Learn clustering techniques** for transaction data segmentation
+2. **Implement classification** for target prediction
+3. **Apply best practices** in data preprocessing
+4. **Explore hyperparameter tuning** for model optimization
+5. **Understand the end-to-end machine learning workflow**
 
 ---
 
-## 📝 Catatan Penting
+## 📝 Important Notes
 
-- Dataset bersumber dari Google Sheets dengan URL publik
-- Gunakan variabel `df` secara konsisten di seluruh notebook
-- Pastikan untuk melakukan **Run All** sebelum submission
-- Jangan mengubah struktur cell yang sudah disediakan
-- Output yang diharapkan harus sesuai dengan contoh yang diberikan
+- The dataset is sourced from a public Google Sheets URL
+- Use the variable `df` consistently across notebooks
+- Make sure to **Run All** cells before submission
+- Do not change the provided cell structure
+- Expected outputs should match the provided examples
 
 ---
 
 ## 👨‍💻 Author
 
-**Nama:** Haikal Fairuzi Maulana 
-**Kursus:** Belajar Machine Learning Pemula (BMLP)  
-**Submission:** Akhir BMLP
+**Name:** Haikal Fairuzi Maulana 
+**Course:** Belajar Machine Learning Pemula (BMLP)  
+**Submission:** Newbie Machine Learning Engineer  
 
 ---
 
-## 📄 Lisensi
+## 📄 License
 
-Proyek ini dibuat untuk tujuan edukasi sebagai bagian dari kursus Belajar Machine Learning Pemula.
+This project was created for educational purposes as part of the Belajar Machine Learning Pemula course.
 
 ---
 
-*README ini dibuat secara otomatis berdasarkan analisis file-file dalam repository.*
+*This README was automatically generated based on analysis of files in the repository.*
